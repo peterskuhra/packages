@@ -10,7 +10,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mosquitto
 PKG_VERSION:=2.0.18
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://mosquitto.org/files/source/
@@ -36,7 +36,7 @@ endef
 define Package/mosquitto-ssl
     $(call Package/mosquitto/default)
     TITLE+= (with SSL support)
-    DEPENDS+= +libopenssl +MOSQUITTO_LWS:libwebsockets-openssl +MOSQUITTO_DYNAMIC_SECURITY:cJSON
+    DEPENDS+= +libopenssl +MOSQUITTO_LWS:libwebsockets4-full +MOSQUITTO_DYNAMIC_SECURITY:cJSON
     VARIANT:=ssl
     PROVIDES:=mosquitto
 endef
@@ -229,12 +229,12 @@ CMAKE_OPTIONS += \
 	-DWITH_ADNS=OFF \
 	-DWITH_BUNDLED_DEPS=ON \
 	-DWITH_DLT=OFF \
-	-DWITH_PERSISTENCE=OFF \
+	-DWITH_PERSISTENCE=ON \
 	-DWITH_PIC=ON \
 	-DWITH_SOCKS=ON \
 	-DWITH_SRV=ON \
 	-DWITH_SYSTEMD=OFF \
-	-DWITH_SYS_TREE=OFF \
+	-DWITH_SYS_TREE=ON \
 	-DWITH_THREADING=ON
 
 ifeq ($(BUILD_VARIANT),nossl)
